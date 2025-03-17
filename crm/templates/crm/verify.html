@@ -1,0 +1,166 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <title>Verify Your Self</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: white;
+      }
+
+      .container {
+        width: 300px;
+        height: 40vh;
+        padding: 40px 30px;
+        background-color: #363124;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        transform: scale(1.5);
+      }
+
+      .container h4 {
+        color: white;
+        font-size: 24px;
+        font-family: Open Sans;
+        font-weight: 700;
+      }
+
+      .container p {
+        color: #b6b6b6;
+        font-size: 12px;
+        font-family: Open Sans;
+        font-weight: 400;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        text-align: center;
+      }
+
+      .container form {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+      }
+
+      .input_fields {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      .input_fields input {
+        max-width: 60%;
+        height: 35px;
+        text-align: center;
+        border-radius: 5px;
+        border: none;
+        background: #f0f0f0;
+        font-size: 25px;
+      }
+
+      .input_fields input::-webkit-inner-spin-button,
+      .input_fields input::-webkit-outer-spin-button {
+        display: none;
+      }
+
+      .input_fields input:focus {
+        outline: 3px solid #00b991;
+        outline-offset: 2px;
+      }
+
+      form button {
+        margin-top: 25px;
+        width: 92%;
+        background: white;
+        color: #525252;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 0;
+        border: 1px solid black;
+        border-radius: 6px;
+        cursor: pointer;
+        pointer-events: none;
+        transition: all 0.2s ease;
+      }
+
+      form button.active {
+        background: #f09e22;
+        pointer-events: auto;
+        color: #1a1a1a;
+      }
+
+      form button:hover {
+        background: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h4>Verify Code</h4>
+      <p>We have sent a verification code to your email address.</p>
+
+      <div class="input_fields">
+        <input type="text" name="otp" id="otp" placeholder="Enter OTP" />
+      </div>
+    </div>
+
+    {% comment %}
+    <p>Please Enter the OTP</p>
+    <input type="text" name="otp" id="otp" /> {% endcomment %}
+    <script>
+      $("#otp").change(function () {
+        let otp = $("#otp").val();
+        console.log("OTP: ", otp);
+
+        if (otp == "{{otp}}") {
+          console.log("OTP Matched");
+
+          $.ajax({
+            type: "POST",
+            url: '{% url "verify" %}',
+            data: {
+              otp: otp,
+              first_name: "{{first_name}}",
+              last_name: "{{last_name}}",
+              username: "{{username}}",
+              email: "{{email}}",
+              password1: "{{password1}}",
+              password2: "{{password2}}",
+            },
+            success: function (data) {
+              console.log("OTP success");
+              window.location.href = "dashboard";
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

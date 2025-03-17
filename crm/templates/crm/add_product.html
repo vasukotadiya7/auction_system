@@ -1,0 +1,282 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Auction House</title>
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+  </head>
+  <body>
+    <nav>
+      <a href=""><img src="{% static "crm/images/logo.png" %}" alt=""></a>
+      <div id="navbar">
+        <p style="color: white; font-size: 24px">Hello, {{user.username}}</p>
+
+        <a class="profile-pic" href="{% url  'profile' %}"
+          ><img
+            class="rounded-circle shadow-4"
+            style="
+              width: 80px;
+              vertical-align: middle;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              margin-left: 10px;
+            "
+            alt="Avatar"
+            src="{{ user.profile.image.url }}"
+        /></a>
+      </div>
+    </nav>
+
+    <section id="box">
+      <div>
+        <ul id="containar">
+          <li><a href="{% url 'dashboard' %}">Home</a></li>
+          <li><a href="{% url 'my_products' %}">My Products</a></li>
+          <li>
+            <a class="active" href="{% url 'add_product' %}">Add Products</a>
+          </li>
+          <li><a href="{% url 'auction' %}">Auction</a></li>
+          <li><a href="{% url 'my_bids' %}">My Bids</a></li>
+          <li><a href="{% url 'user_logout' %}">Logout</a></li>
+        </ul>
+      </div>
+    </section>
+    {% for field, errors in form.errors.items %} {% for error in errors %}
+    <div class="alert alert-danger" role="alert">
+      <strong>{{ field|title }} Error: </strong> {{ error }}
+    </div>
+    {% endfor %} {% endfor %}
+
+    <section id="product_form" class="section-p1">
+      <h2 class="heading_h2">ADD PRODUCT</h2>
+      <div class="add_form">
+        {% comment %}
+        <div class="login-details">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit">Add Product</button>
+          </form>
+        </div>
+        {% endcomment %}
+
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="input_row">
+            <div class="input_group">
+              <label for="id_product_name">Product name:</label><br />
+              <input
+                type="text"
+                name="product_name"
+                value="Items"
+                maxlength="100"
+                required
+                id="id_product_name"
+              />
+            </div>
+            <div class="input_group upload">
+              <label for="id_image">Image:</label>
+              <input type="file" name="image" accept="image/*" id="id_image" />
+
+              <label for="id_image">Upload</label>
+            </div>
+          </div>
+
+          <div class="input_row">
+            <div class="input_group">
+              <label for="id_Category">Category:</label>
+              <br />
+              <select name="Category" required id="id_Category">
+                <option value="" selected>---------</option>
+                {% for c in categories %}
+
+                <option value="{{ forloop.counter }}">{{c.title}}</option>
+                {% comment %}
+                <option value="2">Antiques</option>
+
+                <option value="3">Jewellery</option>
+                {% endcomment %} {% endfor %}
+              </select>
+            </div>
+            <div class="input_group">
+              <label for="id_date">Date:</label>
+              <br />
+              <input type="date" name="date" required id="id_date" />
+            </div>
+          </div>
+
+          <div class="input_row">
+            <div class="input_group">
+              <label for="id_start_time">Start time:</label>
+              <br />
+              <input
+                type="time"
+                name="start_time"
+                required
+                id="id_start_time"
+              />
+            </div>
+            <div class="input_group">
+              <label for="id_end_time">End time:</label>
+              <br />
+              <input type="time" name="end_time" required id="id_end_time" />
+            </div>
+          </div>
+
+          <div class="input_row">
+            <div class="input_group">
+              <label for="id_min_price">Min price:</label>
+              <br />
+              <input
+                type="number"
+                name="min_price"
+                value="2000"
+                step="0.01"
+                required
+                id="id_min_price"
+                placeholder="₹"
+              />
+            </div>
+            <div class="input_group">
+              <label for="id_price_interval">Price interval:</label>
+              <br />
+              <input
+                type="number"
+                name="price_interval"
+                value="100"
+                step="0.01"
+                required
+                id="id_price_interval"
+              />
+            </div>
+          </div>
+
+          <div class="input_group">
+            <label for="id_description">Description:</label>
+            <br />
+
+            <textarea
+              name="description"
+              id="id_description"
+              cols="100"
+              rows="5"
+              placeholder="for example :
+              material: crafted with [material type] for quality and durability.
+              color options: available in [color options] to suit individual preferences.
+              brand: from the reputable [brand name] for trusted quality.
+              design: timeless and versatile design for various styles.
+              functionality: [key features] for practical use.
+              limited edition: a rare find with limited availability.
+              packaging: comes in a stylish box with a certificate of authenticity.."
+            ></textarea>
+            <input type="hidden" name="user" value="2" id="id_user" />
+          </div>
+          <button type="submit">Add Product</button>
+
+          {% comment %}
+          <p>
+            <label for="id_Category">Category:</label>
+            <select name="Category" required id="id_Category">
+              <option value="" selected>---------</option>
+
+              <option value="1">Furniture</option>
+
+              <option value="2">Antiques</option>
+
+              <option value="3">Jewellery</option>
+            </select>
+          </p>
+          {% endcomment %} {% comment %}
+          <p>
+            <label for="id_product_name">Product name:</label>
+            <input
+              type="text"
+              name="product_name"
+              value="Items"
+              maxlength="100"
+              required
+              id="id_product_name"
+            />
+          </p>
+          {% endcomment %} {% comment %}
+          <p>
+            <label for="id_image">Image:</label>
+            <input type="file" name="image" accept="image/*" id="id_image" />
+          </p>
+          {% endcomment %} {% comment %}
+          <p>
+            <label for="id_min_price">Min price:</label>
+            <input
+              type="number"
+              name="min_price"
+              value="2000"
+              step="0.01"
+              required
+              id="id_min_price"
+            />
+          </p>
+
+          <p>
+            <label for="id_price_interval">Price interval:</label>
+            <input
+              type="number"
+              name="price_interval"
+              value="100"
+              step="0.01"
+              required
+              id="id_price_interval"
+            />
+          </p>
+          {% endcomment %} {% comment %}
+          <p>
+            <label for="id_date">Date:</label>
+            <input type="date" name="date" required id="id_date" />
+          </p>
+          {% endcomment %} {% comment %}
+          <p>
+            <label for="id_start_time">Start time:</label>
+            <input type="time" name="start_time" required id="id_start_time" />
+          </p>
+
+          <p>
+            <label for="id_end_time">End time:</label>
+            <input type="time" name="end_time" required id="id_end_time" />
+          </p>
+          {% endcomment %} {% comment %}
+          <p>
+            <label for="id_description">Description:</label>
+            <textarea name="description" cols="40" rows="3" id="id_description">
+                This is the product</textarea
+            >
+          </p>
+          {% endcomment %} {% comment %}
+          <button type="submit">Add Product</button> {% endcomment %}
+        </form>
+      </div>
+    </section>
+  </body>
+  <script>
+    $("[type=file]").on("change", function () {
+      // Name of file and placeholder
+      var file = this.files[0].name;
+      var dflt = $(this).attr("placeholder");
+      if ($(this).val() != "") {
+        $(this).next().text(file);
+      } else {
+        $(this).next().text(dflt);
+      }
+    });
+  </script>
+</html>

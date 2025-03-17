@@ -1,0 +1,221 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment</title>
+  </head>
+  <body>
+    <h1>Payment Details</h1>
+    <p>Product Name: {{ product.product_name }}</p>
+    <p>Amount: {{ amount }}</p>
+    <!-- Other payment details can be displayed here -->
+
+    <!-- Razorpay payment form -->
+    <form action="{% url 'payment' pid=product.pid %}" method="POST">
+      {% csrf_token %}
+      <!-- Include a submit button to initiate payment -->
+      <button id="rzp-button1" type="submit">Pay with Razorpay</button>
+    </form>
+
+    <!-- Include Razorpay SDK script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      var options = {
+        key: "rzp_test_HLUDc0d2oVKUYA", // Your Razorpay API key
+        amount: "{{ amount }}", // Amount to be charged in smallest currency unit
+        currency: "INR", // Currency code (e.g., INR)
+        name: "Auction House", // Your business name
+        description: "Purchases", // Payment description
+        image: "https://example.com/your_logo",
+        order_id: "{{ payment.razor_pay_order_id }}", // Order ID received from server
+        handler: function (response) {
+          // Handle successful payment
+          // Redirect or display success message
+          window.location.href =
+            "http://127.0.0.1:8000/success/?razorpay_payment_id=" +
+            response.razorpay_payment_id +
+            "&razorpay_order_id=" +
+            response.razorpay_order_id +
+            "&razorpay_signature=" +
+            response.razorpay_signature;
+        },
+        prefill: {
+          name: "{{ user.full_name }}", // Prefill customer name
+          email: "{{ user.email }}", // Prefill customer email
+          contact: "{{ user.phone }}", // Prefill customer phone number
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.on("payment.failed", function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+      });
+      document.getElementById("rzp-button1").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+      };
+    </script>
+  </body>
+</html>
+{% endcomment %} {%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: white;
+      }
+
+      .container {
+        width: 300px;
+        height: 50vh;
+        padding: 40px 30px;
+        background-color: #363124;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        transform: scale(1.5);
+      }
+
+      .container h4 {
+        color: white;
+        font-size: 24px;
+        font-family: Open Sans;
+        font-weight: 700;
+      }
+
+      .container p {
+        color: #b6b6b6;
+        font-size: 12px;
+        font-family: Open Sans;
+        font-weight: 400;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    {% comment %}
+    <div class="section-p1">
+      <img class="center" src="{% static "crm/images/payment-2.png" %}" alt="">
+    </div>
+    {% endcomment %}
+
+    <div class="container">
+      <h4>Payment Details</h4>
+      <p>Product Name: {{ product.product_name }}</p>
+      <p>Amount: {{ amount }}</p>
+      <!-- Other payment details can be displayed here -->
+
+      <!-- Razorpay payment form -->
+      <form action="{% url 'payment' pid=product.pid %}" method="POST">
+        {% csrf_token %}
+        <!-- Include a submit button to initiate payment -->
+        <button
+          id="rzp-button1"
+          type="submit"
+          style="
+            margin-top: 25px;
+            width: 100%;
+            background: white;
+            color: #1f1c14;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 6px;
+          "
+        >
+          Pay with Razorpay
+        </button>
+      </form>
+    </div>
+    <!-- Include Razorpay SDK script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      var options = {
+        key: "rzp_test_HLUDc0d2oVKUYA", // Your Razorpay API key
+        amount: "{{ amount }}", // Amount to be charged in smallest currency unit
+        currency: "INR", // Currency code (e.g., INR)
+        name: "Auction House", // Your business name
+        description: "Purchases", // Payment description
+        image: "https://example.com/your_logo",
+        order_id: "{{ payment.razor_pay_order_id }}", // Order ID received from server
+        handler: function (response) {
+          // Redirect to the success page with product ID if available
+          var redirectURL =
+            "http://127.0.0.1:8000/success/?razorpay_payment_id=" +
+            response.razorpay_payment_id +
+            "&razorpay_order_id=" +
+            response.razorpay_order_id +
+            "&razorpay_signature=" +
+            response.razorpay_signature;
+
+          // Check if product ID is available in the response
+          if (response.pid) {
+            redirectURL += "&pid=" + response.pid;
+          }
+
+          window.location.href = redirectURL;
+        },
+        prefill: {
+          name: "{{ user.full_name }}", // Prefill customer name
+          email: "{{ user.email }}", // Prefill customer email
+          contact: "{{ user.phone }}", // Prefill customer phone number
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.on("payment.failed", function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+      });
+      document.getElementById("rzp-button1").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+      };
+    </script>
+  </body>
+</html>

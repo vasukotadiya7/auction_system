@@ -1,0 +1,244 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Auction House</title>
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+  </head>
+
+  {% comment %} admin - dev password - fastestmanalive@123 {% endcomment %}
+
+  <body>
+    {% comment %}
+    <h1>This is the Dashboard!</h1>
+    {% endcomment %}
+
+    <nav>
+      <a href=""><img src="{% static "crm/images/logo.png" %}" alt=""></a>
+      <div id="navbar">
+        <p style="color: white; font-size: 24px">Hello, {{user.username}}</p>
+
+        <a class="profile-pic" href="{% url  'profile' %}"
+          ><img
+            class="rounded-circle shadow-4"
+            style="
+              width: 80px;
+              vertical-align: middle;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              margin-left: 10px;
+            "
+            alt="Avatar"
+            src="{{ user.profile.image.url }}"
+        /></a>
+      </div>
+    </nav>
+
+    <section id="box">
+      <div>
+        <ul id="containar">
+          <li><a class="active" href="{% url 'dashboard' %}">Home</a></li>
+          <li><a href="{% url 'my_products' %}">My Products</a></li>
+          <li><a href="{% url 'add_product' %}">Add Products</a></li>
+          <li><a href="{% url 'auction' %}">Auction</a></li>
+          <li><a href="{% url 'my_bids' %}">My Bids</a></li>
+          <li><a href="{% url  'user_logout' %}">Logout</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="hero">
+      <div>
+        <span class="hero_header1">Unlock Rare Treasures:</span>
+        <span class="hero_header2">Join Our Online Auction Experience</span>
+        <span>Immerse Yourself In A World Of Bidding Excitement. </span>
+        <ul class="hero_detail">
+          <li>Discover Unique Items,</li>
+          <li>Engage In Real-Time Auctions,</li>
+          <li>Secure Exclusive Treasures With Our Online Auction Platform.</li>
+        </ul>
+        <a href="{% url 'auction' %}"
+          ><button class="hero-btn">Start Bidding Now</button></a
+        >
+      </div>
+
+      <div class="heroimg">
+        <img src={% static "crm/images/Group 2.svg"%} alt="">
+      </div>
+    </section>
+
+    <section id="home_detail" class="section-p1">
+      <h2>WELCOME !</h2>
+      <div class="home_dec">
+        <p>
+          We're Thrilled To See You Again On Auction House. Your Login Opens The
+          Door To A World Of Unique Finds, Exciting Auctions, And Endless
+          Possibilities.
+        </p>
+        <br />
+        <p>
+          As You Step Back Into Our Virtual Marketplace, Immerse Yourself In A
+          Curated Selection Of Items That Await Your Bids. Explore Diverse
+          Categories, Discover Hidden Gems, And Experience The Thrill Of Winning
+          Coveted Treasures.
+        </p>
+        <br />
+        <p>
+          For Sellers, Your Journey Begins With Effortless Management Of
+          Listings. Navigate To Your Personalized Dashboard Where You Can Easily
+          Create, Track, And Optimize Your Auctions. Maximize Your Reach And
+          Impact With Our Seller-Friendly Tools.
+        </p>
+        <br />
+        <p>
+          At Auction House, We Believe In The Power Of Connection Through
+          Exceptional Items. Your Continued Presence Enriches Our Community, And
+          We're Grateful To Have You As Part Of It.
+        </p>
+        <br />
+        <p>
+          Thank You For Choosing Us To Be Your Auction Destination. Enjoy The
+          Journey, Make Memorable Bids, And Let The Excitement Unfold!
+        </p>
+      </div>
+    </section>
+
+    <section id="about-container4">
+      <div class="container1-box1">
+        <h2 class="heading_h2">TESTIMONIAL</h2>
+      </div>
+
+      <div class="container4-box">
+        <div class="container4-box1">
+          <div class="container4-box2">
+            <p>
+              “ We celebrate diversity and strive to create an inclusive
+              environment where everyone feels valued and respected. ”
+            </p>
+          </div>
+          <div class="container4-box3">
+            <div class="container4-box3-div1">
+              <h5>Sagar Bavarva</h5>
+              <h6>Designer</h6>
+            </div>
+            <div class="container4-box3-div2"></div>
+          </div>
+        </div>
+        <div class="container4-box1">
+          <div class="container4-box2">
+            <p>
+              “ We celebrate diversity and strive to create an inclusive
+              environment where everyone feels valued and respected. ”
+            </p>
+          </div>
+          <div class="container4-box3">
+            <div class="container4-box3-div1">
+              <h5>Sagar Bavarva</h5>
+              <h6>Designer</h6>
+            </div>
+            <div class="container4-box3-div2"></div>
+          </div>
+        </div>
+        <div class="container4-box1">
+          <div class="container4-box2">
+            <p>
+              “ We celebrate diversity and strive to create an inclusive
+              environment where everyone feels valued and respected. ”
+            </p>
+          </div>
+          <div class="container4-box3">
+            <div class="container4-box3-div1">
+              <h5>Sagar Bavarva</h5>
+              <h6>Designer</h6>
+            </div>
+            <div class="container4-box3-div2"></div>
+          </div>
+        </div>
+        <div class="container4-box1">
+          <div class="container4-box2">
+            <p>
+              “ We celebrate diversity and strive to create an inclusive
+              environment where everyone feels valued and respected. ”
+            </p>
+          </div>
+          <div class="container4-box3">
+            <div class="container4-box3-div1">
+              <h5>Sagar Bavarva</h5>
+              <h6>Designer</h6>
+            </div>
+            <div class="container4-box3-div2"></div>
+          </div>
+        </div>
+        <div class="container4-box1">
+          <div class="container4-box2">
+            <p>
+              “ We celebrate diversity and strive to create an inclusive
+              environment where everyone feels valued and respected. ”
+            </p>
+          </div>
+          <div class="container4-box3">
+            <div class="container4-box3-div1">
+              <h5>Sagar Bavarva</h5>
+              <h6>Designer</h6>
+            </div>
+            <div class="container4-box3-div2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="section-p1">
+      <div class="col">
+        <img class="logo" src={% static "crm/images/logo2.png"%} alt="">
+        <h4>Connect</h4>
+        <p>
+          <strong>Address : </strong>Vrundavan Society, Jesar Road, Savarkundla,
+          Amreli, Gujarat
+        </p>
+        <p><strong>Phone : </strong>9624881511</p>
+        <p><strong>Hours : </strong>10:00 - 18:00, Mon - Sat</p>
+      </div>
+      <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Term & Condition</a>
+        <a href="#">contact Us</a>
+      </div>
+      <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View Cart</a>
+        <a href="#">My Wishlist</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+      </div>
+      <div class="col">
+        <h4>Follow Us</h4>
+        <div class="icon">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-instagram"></a>
+          <a href="#" class="fa fa-pinterest"></a>
+        </div>
+      </div>
+    </footer>
+
+    <section id="end" class="section-p1">
+      <h4>@ 2023 Copyright, All Rights Reserved</h4>
+    </section>
+  </body>
+</html>

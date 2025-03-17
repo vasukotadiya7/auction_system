@@ -1,0 +1,430 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Auction House</title>
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+  </head>
+  <body>
+    {% comment %}
+    <h1>This is the homepage!</h1>
+
+    <a href="{% url  'registration' %}"> Register here</a>
+    <br />
+    <br />
+    <a href="{% url  'my_login' %}"> Login here</a> {% endcomment %}
+
+    <nav>
+      <a href="#" target="_self"
+        ><img src="{% static "crm/images/logo.png" %}" alt=""></a
+      >
+      <div id="navbar">
+        {% comment %}
+        <button class="btn">
+          <a href="{% url  'registration' %}"></a>Signup
+        </button>
+        {% endcomment %}
+
+        <button class="btn">
+          <a href="{% url 'registration' %}">Signup</a>
+        </button>
+        <button class="btn"><a href="{% url 'my_login' %}">Login</a></button>
+
+        {% comment %}
+        <button class="btn"><a href="{% url  'my_login' %}"></a>Login</button>
+        {% endcomment %}
+      </div>
+    </nav>
+
+    <section id="box">
+      <div>
+        <ul id="containar">
+          <li><a class="active" href="#">Home</a></li>
+          <li><a href="#live-auction">Auction</a></li>
+          <li><a href="#works">How It works</a></li>
+          <li><a href="#auct">Auctioneers</a></li>
+          <li><a href="{% url 'about_us' %}">About Us</a></li>
+          <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="hero">
+      <div>
+        <span class="hero_header1">Unlock Rare Treasures:</span>
+        <span class="hero_header2">Join Our Online Auction Experience</span>
+        <span>Immerse Yourself In A World Of Bidding Excitement. </span>
+        <ul class="hero_detail">
+          <li>Discover Unique Items,</li>
+          <li>Engage In Real-Time Auctions,</li>
+          <li>Secure Exclusive Treasures With Our Online Auction Platform.</li>
+        </ul>
+        <a class="hero-btn" href="{% url 'registration' %}">Start Bidding Now</a>
+      </div>
+
+      <div class="heroimg">
+        <img src="{% static "crm/images/Group 2.svg"%}" alt="">
+      </div>
+    </section>
+
+    {% comment %} <section id="explore" class="section-p1">
+      <div class="ex-head">
+        <span class="heading_h2">EXPLORE ITEMS</span>
+        <div>
+          <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+        </div>
+      </div>
+      <div class="ex-container slideshow-container">
+        <div class="mySlides1">
+        <div class="ex-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="des">
+            <div class="des-box">
+              <h5>Antiques</h5>
+              <h6>3245 items</h6>
+            </div>
+            <a class="des-btn" href="">Explore</a>
+          </div>
+        </div>
+        <div class="ex-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="des">
+            <div class="des-box">
+              <h5>Jewelry</h5>
+              <h6>3245 items</h6>
+            </div>
+            <a class="des-btn" href="">Explore</a>
+          </div>
+        </div>
+        <div class="ex-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="des">
+            <div class="des-box">
+              <h5>Furniture</h5>
+              <h6>3245 items</h6>
+            </div>
+            <a class="des-btn" href="">Explore</a>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+
+    <section id="explore" class="section-p1">
+        <div class="ex-head">
+            <h2 class="heading_h2">EXPLORE ITEMS</h2>
+            <div>
+                <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+            </div>
+        </div>
+
+        <div class="ex-container slideshow-container">
+
+            <div class="mySlides1">
+                <div class="ex-box ">
+                    <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+                    <div class="des">
+                        <div class="des-box">
+                            <h5>Antiques</h5>
+                            <h6>3245 items</h6>
+                        </div>
+                        <div>
+                            <a class="des-btn" href="{% url 'registration' %}">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ex-box ">
+                    <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+                    <div class="des">
+                        <div class="des-box">
+                            <h5>Antiques</h5>
+                            <h6>3245 items</h6>
+                        </div>
+                        <a class="des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                <div class="ex-box ">
+                    <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+                    <div class="des">
+                        <div class="des-box">
+                            <h5>Antiques</h5>
+                            <h6>3245 items</h6>
+                        </div>
+                        <a class="des-btn" href="">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mySlides1">
+                <div class="ex-box ">
+                    <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+                    <div class="des">
+                        <div class="des-box">
+                            <h5>Antiques</h5>
+                            <h6>3245 items</h6>
+                        </div>
+                        <a class="des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                <div class="ex-box ">
+                    <img src={% static "crm/images/Rectangle 8.png"%} alt="">                    <div class="des">
+                        <div class="des-box">
+                            <h5>Antiques</h5>
+                            <h6>3245 items</h6>
+                        </div>
+                        <a class="des-btn" href="">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mySlides1">
+                <div class="ex-box ">
+                    <img src={% static "crm/images/Rectangle 8.png"%} alt="">                    <div class="des">
+                        <div class="des-box">
+                            <h5>Antiques</h5>
+                            <h6>3245 items</h6>
+                        </div>
+                        <a class="des-btn" href="">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="dot-container">
+            <span class=" dot dot1" onclick="currentSlide(1, 0)"></span>
+            <span class="dot dot1" onclick="currentSlide(2, 0)"></span>
+            <span class="dot dot1" onclick="currentSlide(3, 0)"></span>
+        </div>
+    </section>
+
+    <section id="live-auction" class="section-p1">
+        <div class="ex-head">
+            <h2 class="heading_h2">LIVE AUCTIONS</h2>
+            <div>
+                <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+            </div>
+        </div>
+
+        <div class="li-container slideshow-container">
+
+            <div class="mySlides2">
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="mySlides2">
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mySlides2">
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+                <div class="li-box">
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" alt="">                    <div class="li-des">
+                        <div class="li-des-box">
+                            <h5>Sakhyamuni Buddha</h5>
+                            <h6>Current Bid</h6>
+                            <h5>$1551</h5>
+                        </div>
+                        <a class="li-des-btn" href="">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="dot-container">
+            <span class="dot dot2" onclick="currentSlide(1, 1)"></span>
+            <span class="dot dot2" onclick="currentSlide(2, 1)"></span>
+            <span class="dot dot2" onclick="currentSlide(3, 1)"></span>
+        </div>
+    </section>
+
+    <section id="works" class="section-p1">
+        <div class="ex-head">
+            <h2 class="heading_h2">HOW IT WORKS</h2>
+        </div>
+        <div class="works-container">
+            <div class="works-box">
+                <img src={% static "crm/images/Group 8.png"%}  alt="">
+                <span>Create Account</span>
+                <span>Create Account On Web By Email Id
+                    Or Social Media</span>
+            </div>
+            <div class="works-box">
+                <img src={% static "crm/images/Group 8.png"%} alt="">
+                <span>Explore Items</span>
+                <span>Explore Items From Variety Of Categories
+                    Like Jewelry, Sculptures, Collection Etc...</span>
+            </div>
+            <div class="works-box">
+                <img src={% static "crm/images/Group 8.png"%} alt="">
+                <span>Place Bid</span>
+                <span>Place Bid On Auction To Buy Items And If
+                    You Bid Highest You Will Win The Auction</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="auct" class="section-p1">
+        <div class="auct-head">
+            <span class="auct-heading">AUCTIONEERS</span>
+        </div>
+        <div class="auct-container">
+            <div style="font-family: DM Serif Text;text-transform: uppercase;">AUCTION HOUSE</div>
+            <div style="font-family: Imprint MT Shadow;text-transform: capitalize;">Premier</div>
+            <div style="font-family: Dynalight;text-transform: capitalize;">Tracey & Jones</div>
+            <div style="font-family: Akshar;text-transform: uppercase;">AUCTIGON</div>
+            <div style="font-family: Droid Sans;text-transform: capitalize;">Ritche Bros.</div>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+      <div class="col">
+        <img class="logo" src="{% static "crm/images/logo2.png"%}" alt="">
+        <h4>Connect</h4>
+        <p>
+          <strong>Address : </strong>Vrundavan Society, Jesar Road, Savarkundla,
+          Amreli, Gujarat
+        </p>
+        <p><strong>Phone : </strong>9624881511</p>
+        <p><strong>Hours : </strong>10:00 - 18:00, Mon - Sat</p>
+      </div>
+      <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Term & Condition</a>
+        <a href="#">contact Us</a>
+      </div>
+      <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View Cart</a>
+        <a href="#">My Wishlist</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+      </div>
+      <div class="col">
+        <h4>Follow Us</h4>
+        <div class="icon">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-instagram"></a>
+          <a href="#" class="fa fa-pinterest"></a>
+        </div>
+      </div>
+    </footer>
+
+    <section id="end" class="section-p1">
+      <h4>@ 2023 Copyright, All Rights Reserved</h4>
+    </section>
+
+    <script>
+        let slideIndex = [1, 1];
+        let slideId = ["mySlides1", "mySlides2"]
+        let dotClass = ["dot1", "dot2"]
+        showSlides(1, 0);
+        showSlides(1, 1);
+
+        function plusSlides(n, no) {
+            showSlides(slideIndex[no] += n, no);
+        }
+        function currentSlide(n, no) {
+            showSlides(slideIndex[no] += n, no);
+        }
+        function showSlides(n, no) {
+            let i;
+            let x = document.getElementsByClassName(slideId[no]);
+            var dots = document.getElementsByClassName(dotClass[no]);
+            if (n > x.length) { slideIndex[no] = 1 }
+            if (n < 1) { slideIndex[no] = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active1", "");
+            }
+            x[slideIndex[no] - 1].style.display = "block";
+            dots[slideIndex[no] - 1].className += " active1";
+        }
+    </script>
+  </body>
+</html>

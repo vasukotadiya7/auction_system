@@ -1,0 +1,221 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <title>Shipping Detail</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+  </head>
+  <body>
+    <nav>
+      <a href=""><img src="{% static "crm/images/logo.png" %}" alt=""></a>
+      <div id="navbar">
+        <p style="color: white; font-size: 24px">Hello, {{user.username}}</p>
+
+        <a class="profile-pic" href="{% url  'profile' %}"
+          ><img
+            class="rounded-circle shadow-4"
+            style="
+              width: 80px;
+              vertical-align: middle;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              margin-left: 10px;
+            "
+            alt="Avatar"
+            src="{{ user.profile.image.url }}"
+        /></a>
+      </div>
+    </nav>
+
+    <section id="box">
+      <ul id="containar">
+        <li><a href="{% url 'dashboard' %}">Home</a></li>
+        <li><a href="{% url 'my_products' %}">My Products</a></li>
+        <li>
+          <a href="{% url 'add_product' %}">Add Products</a>
+        </li>
+        <li><a class="active" href="{% url 'auction' %}">Auction</a></li>
+        <li><a href="{% url 'my_bids' %}">My Bids</a></li>
+        <li><a href="{% url 'user_logout' %}">Logout</a></li>
+      </ul>
+    </section>
+    <div class="section-p1">
+      <img class="center" src="{% static "crm/images/payment-1.png" %}" alt="">
+    </div>
+    {% comment %}
+    <form method="POST">
+      {% csrf_token %} {{ form.as_p }}
+
+      <button type="submit">Submit</button>
+    </form>
+    {% endcomment %}
+
+    <section id="profile_product_name" class="section-p1">
+      <div class="tabContainer">
+        <div class="buttonContainer">
+          <button style="color: white; background-color: #1f1c14">
+            Shipping Details
+          </button>
+        </div>
+
+        <div class="tabPanel section-p1">
+          <div class="add_form">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="input_row">
+                <div class="input_group">
+                  <label for="">First Name</label><br />
+                  <p>{{ winner.first_name }}</p><hr>
+                </div>
+                <div class="input_group">
+                  <label for="">Last Name</label><br />
+                  <p>{{ winner.last_name }}</p><hr>
+                </div>
+              </div>
+              <div class="input_row">
+                <div class="input_group">
+                  <label for="">Phone No.</label><br />
+                  <p>Phone: {{ winner.profile.phone }}</p><hr>
+                </div>
+                <div class="input_group">
+                  <label for="">Email Id.</label><br />
+                  <p>Email: {{ winner.email }}</p><hr>
+                </div>
+              </div>
+
+              <label for="id_address">Address:</label>
+              <input
+              type="text"
+                name="address"
+                cols="1"
+                rows="1"
+                required
+                aria-describedby="id_address_helptext"
+                id="id_address"
+              ></input>
+              <div class="input_row">
+                <div class="input_group">
+                  <label for="id_state">State:</label>
+                  <input
+                    type="text"
+                    name="state"
+                    rows="1"
+                    required
+                    aria-describedby="id_state_helptext"
+                    id="id_state"
+                  />
+                </div>
+                <div class="input_group">
+                  <label for="id_city">City:</label>
+                  <input
+                    type="text"
+                    name="city"
+                    rows="1"
+                    required
+                    aria-describedby="id_city_helptext"
+                    id="id_city"
+                  />
+                </div>
+              </div>
+
+              <div class="input_row">
+                <div class="input_group">
+                  <label for="id_pincode">Pincode:</label>
+                  <input
+                    type="number"
+                    name="pincode"
+                    min="100000"
+                    required
+                    aria-describedby="id_pincode_helptext"
+                    id="id_pincode"
+                  />
+                </div>
+                <div class="input_group">
+                  <label for="id_country">Country:</label>
+                  <input
+                    type="text"
+                    name="country"
+                    rows="1"
+                    required
+                    aria-describedby="id_country_helptext"
+                    id="id_country"
+                  />
+
+                </div>
+              </div>
+              <div class="pay_nots">
+                <span>Consent : I consent and verify that the data provided by me is valid, in any case of
+                    misleading or inappropriate action by me, i will be heal responsiable and legal action can be
+                    taken.</span>
+                <br><br>
+                <li>Note : External service charges may be applied for your order other than your bid.
+                </li>
+                <br>
+            </div>
+              <button class="payment_btn" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="script.js"></script>
+    {% comment %}
+    <button type="submit" id="rzp-button1">Pay with Razorpay</button> {%
+    endcomment %} {% comment %}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      var options = {
+        key: "rzp_test_HLUDc0d2oVKUYA", // Enter the Key ID generated from the Dashboard
+        amount: "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        currency: "INR",
+        name: "Auction House",
+        description: "Explore Bid Sell",
+        image: "https://example.com/your_logo",
+        order_id: "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        handler: function (response) {
+          window.location.href =
+            "http://127.0.0.1:8000/success/?razorpay_payment_id=" +
+            response.razorpay_payment_id +
+            "&razorpay_order_id=" +
+            response.razorpay_order_id +
+            "&razorpay_signature=" +
+            response.razorpay_signature;
+
+          //alert(response.razorpay_payment_id);
+          //alert(response.razorpay_order_id);
+          //alert(response.razorpay_signature);
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.on("payment.failed", function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+      });
+      document.getElementById("rzp-button1").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+      };
+    </script>
+    {% endcomment %}
+  </body>
+</html>

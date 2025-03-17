@@ -1,0 +1,220 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>My Bids</title>    
+        <link rel="stylesheet" href="{% static 'crm/style.css'%}" /></head>
+<body>
+    <nav>
+        <a href=""><img src="{% static "crm/images/logo.png" %}" alt=""></a>
+        <div id="navbar">
+          <p style="color: white; font-size: 24px">Hello, {{user.username}}</p>
+  
+          <a class="profile-pic" href="{% url  'profile' %}"
+            ><img
+              class="rounded-circle shadow-4"
+              style="
+                width: 80px;
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-left: 10px;
+              "
+              alt="Avatar"
+              src="{{ user.profile.image.url }}"
+          /></a>
+        </div>
+      </nav>
+
+    <section id="box">
+        <ul id="containar">
+        <li><a href="{% url 'dashboard' %}">Home</a></li>
+        <li><a  href="{% url 'my_products' %}">My Products</a></li>
+        <li>
+          <a  href="{% url 'add_product' %}">Add Products</a>
+        </li>
+        <li><a href="{% url 'auction' %}">Auction</a></li>
+        <li><a class="active" href="{% url 'my_bids' %}">My Bids</a></li>
+        <li><a href="{% url 'user_logout' %}">Logout</a></li>
+      </ul>
+    </section>
+
+    <section id="product_details" class="section-p1">
+        <div class="det_header">
+            <h2 class="heading_h2">MY BIDS</h2>
+            <div class="selection">
+                <label for="name"></label>
+                <select id="name">
+                    <option value="live" {% if default_option == "live" %}selected{% endif %}>Live</option>
+                    <option value="closed" {% if default_option == "closed" %}selected{% endif %}>Closed</option>
+                </select>
+            </div>
+        </div>
+    
+        <div id="products_container">
+            <div class="live_products product_container" style="display: none;">
+                {% for bid in live_bids %}
+                <div class="detail_box">
+                    <div class="detail_container">
+                        <div class="detail_box1">
+                            <img src={{bid.product.image.url}} alt="">
+                        </div>
+                        <div class="detail_box2">
+                            <h2>{{bid.product.product_name}}</h2>
+                            <ul>
+                                <li>Date : {{bid.product.date}} </li>
+                                <li>Time : {{bid.product.start_time}} - {{product.end_time}} </li>
+                                <li>Total Bids :  {{ bid.product.total_bids_count }}</li>
+                                <li>Starting Bid : {{bid.product.min_price}} </li>
+                                <li>Top Bid :  {{ bid.product.highest_bid }}</li>
+                                <li>Winner :  Not Announced</li>
+                            </ul>
+                        </div>
+                        <div class="detail_box3">
+                            {% comment %} <button><a href="{% url 'product_detail' product.pid %}">View Details</a></button> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No live products available</p>
+                {% endfor %}
+            </div>
+
+        {% comment %} {% if closed_bids %}
+            <ul>
+                {% for bid in closed_bids %}
+                    <li>{{ bid.product.product_name }} - {{ bid.product.description }}</li>
+                    <!-- Add additional bid or product details as needed -->
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No closed bids.</p>
+        {% endif %} {% endcomment %}
+        
+        <div class="closed_products product_container" style="display: none;">
+            {% for bid in closed_bids %}
+            <div class="detail_box">
+                <div class="detail_container">
+                    <div class="detail_box1">
+                        <img src={{bid.product.image.url}} alt="">
+                    </div>
+                    <div class="detail_box2">
+                        <h2>{{bid.product.product_name}}</h2>
+                        <ul>
+                            <li>Date : {{bid.product.date}} </li>
+                            <li>Time : {{bid.product.start_time}} - {{bid.product.end_time}} </li>
+                            <li>Total Bids :  {{ bid.product.total_bids_count }}</li>
+                            <li>Starting Bid : {{bid.product.min_price}} </li>
+                            <li>Top Bid :  {{ bid.product.highest_bid }}</li>
+                            <li>Winner :  {{bid.product.winner}}</li>
+                        </ul>
+                    </div>
+                    <div class="detail_box3">
+                        {% comment %} <button><a href="{% url 'product_detail' product.pid %}">View Details</a></button>{% endcomment %}                            </div> 
+                </div>
+            </div>
+            {% empty %}
+            <p>No closed products available</p>
+            {% endfor %}
+        </div>
+
+        </div>
+    </section>
+
+{% comment %} <footer class="section-p1">
+    <div class="col">
+        <img class="logo" src={% static "crm/images/logo2.png"%} alt="">
+        <h4>Connect</h4>
+        <p><strong>Address : </strong>Vrundavan Society, Jesar Road, Savarkundla, Amreli, Gujarat</p>
+        <p><strong>Phone : </strong>9624881511</p>
+        <p><strong>Hours : </strong>10:00 - 18:00, Mon - Sat</p>
+
+    </div>
+    <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Term & Condition</a>
+        <a href="#">contact Us</a>
+    </div>
+    <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View Cart</a>
+        <a href="#">My Wishlist</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+    </div>
+    <div class="col">
+        <h4>Follow Us</h4>
+        <div class="icon">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-instagram"></a>
+            <a href="#" class="fa fa-pinterest"></a>
+        </div>
+    </div>
+</footer>
+
+<section id="end" class="section-p1">
+    <h4>@ 2023 Copyright, All Rights Reserved</h4>
+</section> {% endcomment %}
+
+
+
+    <script>
+        window.addEventListener('load', function() {
+            var defaultOption = "{{ default_option }}";
+            var productsFilter = document.getElementById('name');
+            var event = new Event('change');
+    
+            if (productsFilter) {
+                productsFilter.value = defaultOption;
+                productsFilter.dispatchEvent(event);
+            }
+        });
+
+        document.getElementById('name').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var productContainers = document.querySelectorAll('.product_container');
+            productContainers.forEach(function(container) {
+                container.style.display = 'none';
+            });
+            var selectedContainer = document.querySelector('.' + selectedValue + '_products');
+            if (selectedContainer) {
+                selectedContainer.style.display = 'block';
+            }
+        });
+        var tabButtons=document.querySelectorAll(".tabContainer .buttonContainer button");
+        var tabPanels=document.querySelectorAll(".tabContainer  .tabPanel");
+        
+        function showPanel(panelIndex,colorCode) {
+            tabButtons.forEach(function(node){
+                node.style.backgroundColor="";
+                node.style.color="";
+            });
+            tabButtons[panelIndex].style.backgroundColor="#1f1c14";
+            tabButtons[panelIndex].style.color="white";
+            tabPanels.forEach(function(node){
+                node.style.display="none";
+            });
+            tabPanels[panelIndex].style.display="block";
+            tabPanels[panelIndex].style.backgroundColor="white";
+        }
+        
+        showPanel(0);
+
+    </script>
+    
+</body>
+</html>

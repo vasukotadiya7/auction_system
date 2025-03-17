@@ -1,0 +1,209 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'crm/registration.css'%}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    {% comment %}
+    <h1>Register Now!</h1>
+    {% endcomment %}
+    <nav>
+      <a href="{% url "" %}"><img src="{% static "crm/images/logo.png" %}"
+      alt="" />
+      <div id="navbar">
+        <button class="btn"><a href="{% url 'my_login' %}">Login</a></button>
+      </div>
+    </nav>
+    {% for message in messages %}
+    <div
+      class="alert alert-{{ message.tags }} alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>Message : </strong> {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %}
+
+    <section id="login-box">
+      <div class="login-left">
+        <h1
+          style="
+            color: white;
+            font-size: 66px;
+            font-family: Poppins;
+            font-weight: 500;
+            word-wrap: break-word;
+          "
+        >
+          Sign up as
+        </h1>
+        <h1
+          style="
+            color: #f09e22;
+            font-size: 66px;
+            font-family: Poppins;
+            font-weight: 500;
+            text-decoration: underline;
+            word-wrap: break-word;
+          "
+        >
+          User
+        </h1>
+      </div>
+      <div class="login-right">
+        <div class="login-btn">
+          <div><a class="active" href="">User</a></div>
+        </div>
+        <div class="login-details signup-details signupuser-details">
+          <form method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            <h3>Nice to see you again</h3>
+            <div>
+              <label for="id_first_name">First name:</label>
+              <input
+                type="text"
+                name="first_name"
+                maxlength="150"
+                id="id_first_name"
+              />
+            </div>
+
+            <div>
+              <label for="id_last_name">Last name:</label>
+              <input
+                type="text"
+                name="last_name"
+                maxlength="150"
+                id="id_last_name"
+              />
+            </div>
+
+            <div>
+              <label for="id_username">Username:</label>
+              <input
+                type="text"
+                name="username"
+                maxlength="150"
+                autofocus
+                required
+                aria-describedby="id_username_helptext"
+                id="id_username"
+              />
+              {% comment %}
+              <small>
+                <span class="helptext" id="id_username_helptext"
+                  >Required. 150 characters or fewer. Letters, digits and
+                  @/./+/-/_ only.
+                </span>
+              </small>
+              {% endcomment %}
+            </div>
+
+            <div>
+              <label for="id_email">Email ID</label>
+              <input type="email" name="email" maxlength="254" id="id_email" />
+            </div>
+
+            <div>
+              <label for="id_password1">Create Password:</label>
+              <input
+                type="password"
+                name="password1"
+                autocomplete="new-password"
+                required
+                aria-describedby="id_password1_helptext"
+                id="id_password1"
+              />
+              {% comment %}
+              <small>
+                <span class="helptext" id="id_password1_helptext"
+                  ><ul>
+                    <li>
+                      Your password can't be too similar to your other personal
+                      information.
+                    </li>
+                    <li>Your password must contain at least 8 characters.</li>
+                    <li>Your password can't be a commonly used password.</li>
+                    <li>Your password can't be entirely numeric.</li>
+                  </ul>
+                </span>
+              </small>
+              {% endcomment %}
+            </div>
+
+            <div>
+              <label for="id_password2">Password confirmation:</label>
+              <input
+                type="password"
+                name="password2"
+                autocomplete="new-password"
+                required
+                aria-describedby="id_password2_helptext"
+                id="id_password2"
+              />
+              {% comment %}
+              <small>
+                <span class="helptext" id="id_password2_helptext"
+                  >Enter the same password as before, for verification.
+                </span>
+              </small>
+              {% endcomment %}
+            </div>
+            {% comment %}
+            <div>
+              <label for="">Address:</label>
+              <input type="text" name="address" maxlength="150" id="address" />
+            </div>
+            <div>
+              <label for="">Date Of Birth</label><br />
+              <input type="date" name="birthday" />
+            </div>
+            {% endcomment %} {% comment %}
+            <input type="submit" value="registration" /> {% endcomment %}
+            <button type="submit" value="registration">Sign up</button>
+            <span
+              >Already have an account ?
+              <a href="{% url 'my_login' %}">Login now</a></span
+            >
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="end" class="section-p1">
+      <h4>@ 2023 Copyright, All Rights Reserved</h4>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+    
+
+</head>
+<body>
+    <nav>
+        <a href=""><img src="{% static "crm/images/logo.png" %}" alt=""></a>
+        <div id="navbar">
+          <p style="color: white; font-size: 24px">Hello, {{user.username}}</p>
+  
+          <a class="profile-pic" href="{% url  'profile' %}"
+            ><img
+              class="rounded-circle shadow-4"
+              style="
+                width: 80px;
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-left: 10px;
+              "
+              alt="Avatar"
+              src="{{ user.profile.image.url }}"
+          /></a>
+        </div>
+      </nav>
+
+    <section id="box">
+        <ul id="containar">
+        <li><a href="{% url 'dashboard' %}">Home</a></li>
+        <li><a  href="{% url 'my_products' %}">My Products</a></li>
+        <li>
+          <a  href="{% url 'add_product' %}">Add Products</a>
+        </li>
+        <li><a class="active" href="{% url 'auction' %}">Auction</a></li>
+        <li><a href="{% url 'my_bids' %}">My Bids</a></li>
+        <li><a href="{% url 'user_logout' %}">Logout</a></li>
+      </ul>
+    </section>
+
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message : </strong> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    {% endfor %}
+
+    
+
+    <div class="bread">
+        <ul class="breadcrumb">
+            <li><a  href="profile_action.html">Auction</a></li>
+            <li><a href="#">Categories Name</a></li>
+            <li><a class="active" href="#">Product Name</a></li>
+        </ul>
+    </div>
+
+    <section id="profile_product_name" class="section-p1">
+
+        <div class="user_detail">
+            <div class="user_detail_1">
+                <img src={{product.image.url}} alt="">
+            </div>
+            <div class="user_detail_2">
+                <div class="user_detail_3">
+                    <div class="user_detail_3_heading">
+                        <h2 class="heading_h2">{{product.product_name}}</h2>
+                        <span>{{product_status}}</span>
+                    </div>
+                    
+                        <p>Date : {{product.date}}</p>
+                        <p>Time : {{product.start_time}} - {{product.end_time}}</p>
+                        <p>Starting Bid : {{product.min_price}}</p>
+                        <p>Highest Bid : {{ product.highest_bid }}</p>
+
+                        {% if product_status == "Live" %}
+                        <form method="post" action="{% url 'place_bid' pid=product.pid %}">
+                            {% csrf_token %}
+                            <div class="user_detail_4">
+                            <label for="id_amount">Enter Your Bid :</label>
+                            <input type="number" name="amount" step="0.01" required id="id_amount">
+                            </div>
+                        </form>
+                        {% elif product_status == "Closed" %}
+
+                
+                            {% if product.get_winner == request.user.username %}
+                                {% comment %} add here the payment link instead of winner {% endcomment %}
+                                <div class="user_detail_5">
+                                    <div>
+                                <span>You Have Won The Bidding !!!</span><br>
+                                <button><a href="{% url 'shipping_details' pid=product.pid %}">Proceed With Payment</a></button>
+                            </div>
+                        </div>
+
+                                    {% comment %} <a href="payment_1.html">Proceed With Payment</a> {% endcomment %}
+                                    
+                                {% comment %} <p>The winner is {{product.winner}}</p> {% endcomment %}
+                            {% endif %}
+                        {% else %}
+                        <div class="user_detail_5">
+                            <span>This product is upcoming. Stay tuned for bidding!</span>
+                           
+                          </div>
+                        {% comment %} <p>This product is upcoming. Stay tuned for bidding!</p> {% endcomment %}
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    
+        {% comment %} <h2> Product Name : {{product.product_name}} </h2>
+        <p> Date : {{product.date}} </p>
+        <p> Time : {{product.start_time}} - {{product.end_time}} </p>
+        <p> Starting Bid : {{product.min_price}} </p>
+        <p> Last Bid : {{ product.highest_bid }} </p> 
+        
+        <p> Status : {{product_status}} </p> 
+        {% endcomment %}
+        {% comment %} <div class="detail_box1">
+        <p> Product Image :  <img src={{product.image.url}} alt=""> </p>
+        </div> {% endcomment %}
+
+        <div class="tabContainer">
+
+            <div class="buttonContainer">
+                <button onclick="showPanel(0)">Product Details</button>
+                <button onclick="showPanel(1)">Seller Details</button>
+                <button onclick="showPanel(2)">Bid History</button>
+            </div>
+        
+            <div class="tabPanel section-p1">
+                    <p> Product Name : {{product.product_name}} </p>
+                    <hr>
+                    <p> Category : {{product.Category}} </p>
+                    <hr>
+                    <p> Initital Price: {{product.min_price}} </p>                    
+                    <hr>
+                    <p> Description : {{product.description}} </p>
+                    <hr>
+            </div>
+
+            
+            <div class="tabPanel section-p1">
+                <form>
+                    <div class="category_box">
+                        <div>
+                            <p> Seller Name : {{ product.user.first_name }}  {{ product.user.last_name }}  </p> 
+
+                            <hr>
+                            <p> Address: {{product.user.profile.address}} </p>
+
+                            <hr>
+                        </div>
+                        <img src =  "{{product.user.profile.image.url}}" >
+                    </div>
+                    <p> Phone No. : {{product.user.profile.phone}} </p>
+
+                    <hr>
+                    <p> Email : {{product.user.email}} </p>
+                    <br>
+                    <hr>
+                </form>
+            </div>
+
+
+            
+
+            <div class="tabPanel section-p1">
+                <div class="bid-container">
+                    <div class="bid-box">
+                        <div>Total Bids</div>
+                        <div>{{ product.total_bids_count }}</div>
+                    </div>
+                    <div class="bid-box">
+                        <div>Initial Price</div>
+                        <div>{{product.min_price}}</div>
+                    </div>
+                    <div class="bid-box"> 
+                        <div>Highest Bid</div>
+                        <div>{{ product.highest_bid }}</div>
+                    </div>
+                </div>
+                {% if product.bid_history.all %}
+
+                <table>
+                    <tr style="background: rgba(0, 0, 0, 0.18);">
+                      <th>Bid No</th>
+                      <th>Bidder Name</th>
+                      <th>Date And Time</th>
+                      <th>Bid Amount</th>
+                    </tr>
+                    {% for bid in product.bid_history.all %}
+                    <tr style="color: rgb(127 127 127);">
+                        <td>{{ forloop.counter }}</td>  <!-- Bid number -->
+                        <td>{{ bid.user.username }}</td>  <!-- Bidder name -->
+                        <td>{{ bid.timestamp }}</td>  <!-- Date & Time -->
+                        <td>{{ bid.amount }}</td>  <!-- Bid amount -->
+                    </tr>
+                    {% endfor %}
+                  </table>
+                  {% else %}
+                  <p>No bids yet</p>
+                  {% endif %}
+            </div>
+    </section>
+
+    
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src={% static "crm/images/logo2.png"%} alt="">
+            <h4>Connect</h4>
+            <p><strong>Address : </strong>Vrundavan Society, Jesar Road, Savarkundla, Amreli, Gujarat</p>
+            <p><strong>Phone : </strong>9624881511</p>
+            <p><strong>Hours : </strong>10:00 - 18:00, Mon - Sat</p>
+
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term & Condition</a>
+            <a href="#">contact Us</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+        <div class="col">
+            <h4>Follow Us</h4>
+            <div class="icon">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-pinterest"></a>
+            </div>
+        </div>
+    </footer>
+
+    <section id="end" class="section-p1">
+        <h4>@ 2023 Copyright, All Rights Reserved</h4>
+    </section>
+
+
+    <script src="{% static 'crm/script.js' %}"></script>
+    
+   
+
+
+
+</body>
+</html>

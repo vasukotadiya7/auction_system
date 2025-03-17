@@ -1,0 +1,355 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>My Product</title>
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+  </head>
+
+  <body>
+    <nav>
+      <a href=""><img src="{% static "crm/images/logo.png" %}" alt=""></a>
+      <div id="navbar">
+        <p style="color: white; font-size: 24px">Hello, {{user.username}}</p>
+
+        <a class="profile-pic" href="{% url  'profile' %}"
+          ><img
+            class="rounded-circle shadow-4"
+            style="
+              width: 80px;
+              vertical-align: middle;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              margin-left: 10px;
+            "
+            alt="Avatar"
+            src="{{ user.profile.image.url }}"
+        /></a>
+      </div>
+    </nav>
+
+    <section id="box">
+      <ul id="containar">
+        <li><a href="{% url 'dashboard' %}">Home</a></li>
+        <li><a href="{% url 'my_products' %}">My Products</a></li>
+        <li>
+          <a href="{% url 'add_product' %}">Add Products</a>
+        </li>
+        <li><a class="active" href="{% url 'auction' %}">Auction</a></li>
+        <li><a href="{% url 'my_bids' %}">My Bids</a></li>
+        <li><a href="{% url 'user_logout' %}">Logout</a></li>
+      </ul>
+    </section>
+
+    <section id="explore" class="section-p1">
+      <div class="ex-head">
+        <h2 class="heading_h2">CATEGORIZED ITEMS</h2>
+        <div>
+          <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+        </div>
+      </div>
+      <div class="ex-container">
+        {% for c in categories %}
+        <div class="ex-box">
+          <img src="{{c.image.url}}" alt="" />
+          <div class="des">
+            <div class="des-box">
+              <h5>{{c.title}}</h5>
+              <h6>{{c.category.count}} Item{{c.category.count|pluralize}}</h6>
+            </div>
+            <a class="des-btn" href="{% url 'category_view' c.cid %}"
+              >Explore</a
+            >
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="live-auction" class="section-p1">
+      <div class="ex-head">
+        <h2 class="heading_h2">LIVE AUCTIONS</h2>
+        <div>
+          <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+        </div>
+      </div>
+
+      <div class="li-container">
+        {% for product in live_products %}
+        <div class="li-box">
+          <img src="{{product.image.url}}" alt="" width:20vw height: 30vh />
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>{{product.product_name}}</h5>
+              <h6>Current Bid :</h6>
+              <h5>{{product.min_price}}</h5>
+            </div>
+            <a class="li-des-btn" href="{% url 'product_detail' product.pid %}"
+              >View Details</a
+            >
+          </div>
+          {% empty %}
+          <p>No live products available</p>
+          {% endfor %}
+        </div>
+        {% comment %}
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Victorian Elephant</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Cultured Necklace</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Ancient Lock</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        {% endcomment %}
+      </div>
+    </section>
+
+    <section id="live-auction" class="section-p1">
+      <div class="ex-head">
+        <h2 class="heading_h2">UP COMING AUCTIONS</h2>
+        <div>
+          <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
+        </div>
+      </div>
+
+      <div class="li-container">
+        {% for product in upcoming_products %}
+        <div class="li-box">
+          <img src="{{product.image.url}}" alt="" />
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>{{product.product_name}}</h5>
+              <h6>Current Bid :</h6>
+              <h5>{{product.min_price}}</h5>
+            </div>
+            <a class="li-des-btn" href="{% url 'product_detail' product.pid %}"
+              >View Details</a
+            >
+          </div>
+        </div>
+        {% empty %}
+        <p>No upcoming products available</p>
+        {% endfor %} {% comment %}
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Victorian Elephant</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Cultured Necklace</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Ancient Lock</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        {% endcomment %}
+      </div>
+    </section>
+
+    <section id="live-auction" class="section-p1">
+      <div class="ex-head">
+        <h2 class="heading_h2">CLOSED AUCTIONS</h2>
+        <div>
+          <a class="prev" onclick="plusSlides(-1, 3)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 3)">&#10095;</a>
+        </div>
+      </div>
+
+      <div class="li-container">
+        {% for product in closed_products %}
+        <div class="li-box">
+          <img src="{{product.image.url}}" alt="" />
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>{{product.product_name}}</h5>
+              <h6>Highest Bid :</h6>
+              <h5>{{ product.highest_bid }}</h5>
+            </div>
+
+            <a class="li-des-btn" href="{% url 'product_detail' product.pid %}"
+              >View Details</a
+            >
+          </div>
+        </div>
+        {% empty %}
+        <p>No closed products available</p>
+        {% endfor %} {% comment %}
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Victorian Elephant</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        {% endcomment %} {% comment %}
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Cultured Necklace</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        <div class="li-box">
+          <img src={% static "crm/images/Rectangle 8.png"%} alt="">
+          <div class="li-des">
+            <div class="li-des-box">
+              <h5>Ancient Lock</h5>
+              <h6>Current Bid</h6>
+              <h5>$1551</h5>
+            </div>
+            <button class="li-des-btn">Explore</button>
+          </div>
+        </div>
+        {% endcomment %}
+      </div>
+    </section>
+
+    <footer class="section-p1">
+      <div class="col">
+        <img class="logo" src={% static "crm/images/logo2.png"%} alt="">
+        <h4>Connect</h4>
+        <p>
+          <strong>Address : </strong>Vrundavan Society, Jesar Road, Savarkundla,
+          Amreli, Gujarat
+        </p>
+        <p><strong>Phone : </strong>9624881511</p>
+        <p><strong>Hours : </strong>10:00 - 18:00, Mon - Sat</p>
+      </div>
+      <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Term & Condition</a>
+        <a href="#">contact Us</a>
+      </div>
+      <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View Cart</a>
+        <a href="#">My Wishlist</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+      </div>
+      <div class="col">
+        <h4>Follow Us</h4>
+        <div class="icon">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-instagram"></a>
+          <a href="#" class="fa fa-pinterest"></a>
+        </div>
+      </div>
+    </footer>
+
+    <section id="end" class="section-p1">
+      <h4>@ 2023 Copyright, All Rights Reserved</h4>
+    </section>
+
+    <script>
+      let slideIndex = [1, 1, 1, 1];
+      let slideId = ["mySlides1", "mySlides2", "mySlides3", "mySlides4"];
+      let dotClass = ["dot1", "dot2", "dot3", "dot4"];
+      showSlides(1, 0);
+      showSlides(1, 1);
+      showSlides(1, 2);
+      showSlides(1, 3);
+
+      function plusSlides(n, no) {
+        showSlides((slideIndex[no] += n), no);
+      }
+      function currentSlide(n, no) {
+        showSlides((slideIndex[no] += n), no);
+      }
+      function showSlides(n, no) {
+        let i;
+        let x = document.getElementsByClassName(slideId[no]);
+        var dots = document.getElementsByClassName(dotClass[no]);
+        if (n > x.length) {
+          slideIndex[no] = 1;
+        }
+        if (n < 1) {
+          slideIndex[no] = x.length;
+        }
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active1", "");
+        }
+        x[slideIndex[no] - 1].style.display = "block";
+        dots[slideIndex[no] - 1].className += " active1";
+      }
+    </script>
+  </body>
+</html>

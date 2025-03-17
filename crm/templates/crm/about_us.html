@@ -1,0 +1,287 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{% static 'crm/style.css'%}"></head>
+
+<body>
+
+    <nav>
+        <a href="#"><img src="{% static "crm/images/logo.png" %}" alt=""></a>
+        <div id="navbar">
+            <button class="btn"><a href="{% url 'registration' %}">Signup</a></button>
+            <button class="btn"><a href="{% url 'my_login' %}">Login</a></button>
+        </div>
+    </nav>
+
+    <div id="box">
+            <ul id="containar">
+                <li><a  href="{% url "" %}">Home</a></li>
+                <li><a href="{% url "" %}">Auction</a></li>
+                <li><a href="{% url "" %}">How It works</a></li>
+                <li><a href="{% url "" %}">Auctioneers</a></li>
+                <li><a class="active" href="#">About Us</a></li>
+                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+            </ul>
+    </div>
+
+    <section id="about-hero">
+        <h3>Welcome !</h3>
+        <p>At Auction House - Bidders Heaven, We Embark On A Journey That Transcends The Ordinary—Immersing Enthusiasts
+            And Collectors In A World Where Rare Finds Meet The Thrill Of The Bid. Founded On Passion And Commitment,
+            Our Online Auction House Is More Than A Platform; It's A Celebration Of Unique Stories Waiting To Be
+            Uncovered. Whether You're A Seasoned Collector Or A First-Time Bidder, We Invite You To Discover The Essence
+            Of Auction House - Bidders Heaven, Where Every Bid Tells A Tale And Every Acquisition Becomes A Cherished
+            Chapter In Your Personal Collection. Join Us As We Redefine The Art Of Discovery In The World Of Online
+            Auctions.</p>
+    </section>
+
+    <section id="about-container1" class="section-p1">
+        <div class="container1-box1">
+            <h2 class="heading_h2">MISSION</h2>
+            <p>To provide a seamless and secure platform for online auctions, connecting buyers and sellers from around
+                the world.</p>
+            <h2 class="heading_h2">VISION</h2>
+            <p>To revolutionize the auction industry by leveraging technology to create a transparent and accessible
+                marketplace.</p>
+        </div>
+        <div>
+            <img src="{% static "crm/images/Rectangle 8.png" %}" alt="">
+        </div>
+    </section>
+
+    <section id="about-container2" class="section-p1">
+        <div class="container1-box1">
+            <h2 class="heading_h2">THE SPARK OF INSPIRATION</h2>
+            <p>Our founder, harsh Jobanputra, had a vision to create an innovative platform that would revolutionize the
+                way people buy and sell unique items. Inspired by his own love for collecting rare artifacts, John
+                embarked on a journey to bring the thrill of auctions to the digital world.</p>
+        </div>
+        <div>
+            <img src="{% static "crm/images/My image.jpg" %}" alt="">
+        </div>
+    </section>
+
+    <section id="about-container3" class="section-p1">
+        <div class="container1-box1">
+            <h2 class="heading_h2">our core values</h2>
+        </div>
+        <div class="container3-box">
+            <div class="container">
+                <div>
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" class="image">
+                    <h3>Integrity</h3>
+                </div>
+                <div class="overlay">
+                    <div class="text">We believe in conducting business with the highest level of integrity, honesty,
+                        and transparency. We strive to build trust with our customers, partners, and employees.</div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" class="image">
+                    <h3>Innovation</h3>
+                </div>
+                <div class="overlay">
+                    <div class="text">We embrace innovation and continuously seek new ways to improve our services and
+                        deliver exceptional experiences to our customers. We encourage creativity and out-of-the-box
+                        thinking.</div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" class="image">
+                    <h3>Customer Focus</h3>
+                </div>
+                <div class="overlay">
+                    <div class="text">Our customers are at the heart of everything we do. We are committed to
+                        understanding their needs, providing personalized solutions, and delivering outstanding customer
+                        service.</div>
+                </div>
+            </div>
+        </div>
+        <div class="container3-box">
+            <div class="container">
+                <div>
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" class="image">
+                    <h3>Collaboration</h3>
+                </div>
+                <div class="overlay">
+                    <div class="text">We believe in conducting business with the highest level of integrity, honesty,
+                        and transparency. We strive to build trust with our customers, partners, and employees.</div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" class="image">
+                    <h3>Diversity and Inclusion</h3>
+                </div>
+                <div class="overlay">
+                    <div class="text">We embrace innovation and continuously seek new ways to improve our services and
+                        deliver exceptional experiences to our customers. We encourage creativity and out-of-the-box
+                        thinking.</div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <img src="{% static "crm/images/Rectangle 8.png"%}" class="image">
+                    <h3>Sustainability</h3>
+                </div>
+                <div class="overlay">
+                    <div class="text">Our customers are at the heart of everything we do. We are committed to
+                        understanding their needs, providing personalized solutions, and delivering outstanding customer
+                        service.</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="about-container4">
+        <div class="container1-box1">
+            <h2 class="heading_h2">TESTIMONIOL</h2>
+        </div>
+
+        <div class="container4-box">
+            <div class="container4-box1">
+
+                <div class="container4-box2">
+                    <p>“ We celebrate diversity and strive to create an inclusive environment where everyone feels
+                        valued and respected. ”</p>
+                </div>
+                <div class="container4-box3">
+                    <div class="container4-box3-div1">
+                        <h5>Sagar Bavarva</h5>
+                        <h6>Designer</h6>
+                    </div>
+                    <div class="container4-box3-div2">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="container4-box1">
+
+                <div class="container4-box2">
+                    <p>“ We celebrate diversity and strive to create an inclusive environment where everyone feels
+                        valued and respected. ”</p>
+                </div>
+                <div class="container4-box3">
+                    <div class="container4-box3-div1">
+                        <h5>Sagar Bavarva</h5>
+                        <h6>Designer</h6>
+                    </div>
+                    <div class="container4-box3-div2">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="container4-box1">
+
+                <div class="container4-box2">
+                    <p>“ We celebrate diversity and strive to create an inclusive environment where everyone feels
+                        valued and respected. ”</p>
+                </div>
+                <div class="container4-box3">
+                    <div class="container4-box3-div1">
+                        <h5>Sagar Bavarva</h5>
+                        <h6>Designer</h6>
+                    </div>
+                    <div class="container4-box3-div2">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="container4-box1">
+
+                <div class="container4-box2">
+                    <p>“ We celebrate diversity and strive to create an inclusive environment where everyone feels
+                        valued and respected. ”</p>
+                </div>
+                <div class="container4-box3">
+                    <div class="container4-box3-div1">
+                        <h5>Sagar Bavarva</h5>
+                        <h6>Designer</h6>
+                    </div>
+                    <div class="container4-box3-div2">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="container4-box1">
+
+                <div class="container4-box2">
+                    <p>“ We celebrate diversity and strive to create an inclusive environment where everyone feels
+                        valued and respected. ”</p>
+                </div>
+                <div class="container4-box3">
+                    <div class="container4-box3-div1">
+                        <h5>Sagar Bavarva</h5>
+                        <h6>Designer</h6>
+                    </div>
+                    <div class="container4-box3-div2">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="{% static "crm/images/logo2.png" %}" alt="">
+            <h4>Connect</h4>
+            <p><strong>Address : </strong>Vrundavan Society, Jesar Road, Savarkundla, Amreli, Gujarat</p>
+            <p><strong>Phone : </strong>9624881511</p>
+            <p><strong>Hours : </strong>10:00 - 18:00, Mon - Sat</p>
+
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term & Condition</a>
+            <a href="#">contact Us</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+        <div class="col">
+            <h4>Follow Us</h4>
+            <div class="icon">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-pinterest"></a>
+            </div>
+        </div>
+    </footer>
+
+    <section id="end" class="section-p1">
+        <h4>@ 2023 Copyright, All Rights Reserved</h4>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'crm/images/favicon.ico' %}"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'crm/registration.css'%}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+    {% comment %}
+    <h1>Login Now!</h1>
+    {% endcomment %}
+
+    <nav>
+      <a href="{% url "" %}"><img src="{% static "crm/images/logo.png" %}" alt="" /></a>
+      <div id="navbar">
+        <button class="btn"><a href="{% url 'registration' %}">Signup</a></button>
+        <!-- <button class="btn"><a href="login.html"></a>Login</button> -->
+      </div>
+    </nav>
+
+    <section id="login-box">
+      <div class="login-left">
+        <h1
+          style="
+            color: white;
+            font-size: 66px;
+            font-family: Poppins;
+            font-weight: 500;
+            word-wrap: break-word;
+          "
+        >
+          Login as
+        </h1>
+        <h1
+          style="
+            color: #f09e22;
+            font-size: 66px;
+            font-family: Poppins;
+            font-weight: 500;
+            text-decoration: underline;
+            word-wrap: break-word;
+          "
+        >
+          User
+        </h1>
+      </div>
+      <div class="login-right">
+        <div class="login-btn">
+          <div><a class="active" href="">User</a></div>
+        </div>
+        <div class="login-details">
+          <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            <h3>Nice to see you again</h3>
+
+            <p>
+              <label for="id_username">Username:</label>
+              <input
+                type="text"
+                name="username"
+                maxlength="150"
+                required
+                id="id_username"
+              />
+            </p>
+
+            <p>
+              <label for="id_password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                required
+                id="id_password"
+              />
+            </p>
+
+            {% comment %} <input type="submit" value="Login" /> {% endcomment %}
+            <button type="submit" value="Login">Login</button>
+            <span>Don't have an account ? <a href="{% url 'registration' %}">Sign up now</a></span>
+
+          </form>
+        </div>
+      </div>
+    </section>
+    <section id="end" class="section-p1">
+      <h4>@ 2023 Copyright, All Rights Reserved</h4>
+    </section>
+  </body>
+</html>
