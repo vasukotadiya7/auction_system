@@ -235,7 +235,7 @@ def notify_users(product):
     recipient_list = [user.email for user in users if user.email]
 
     subject = "New Product Alert!"
-    message = f"A new product '{product.name}' has been listed by {product.user.username}. Check it out on the auction platform!"
+    message = f"A new product '{product.product_name}' has been listed by {product.user.username}. Check it out on the auction platform!"
     print(recipient_list)
     if recipient_list:
         send_mail(subject, message, EMAIL_HOST_USER, ["vasukotadiya224@gmail.com","yt224prem@gmail.com"])
@@ -444,7 +444,15 @@ def place_bid(request, pid):
                     return redirect('product_detail', pid=pid)
                 else:
                     # Handle the case where the bid amount is not valid
-                    messages.error(request, f'Your bid amount must be at least {product.price_interval} higher than the current highest bid.')
+                    # Determine expected minimum amount
+                    if product.highest_bid == 0:
+                        minimum_bid = product.min_price
+                        messages.error(request, f'Your bid must be at least ₹{minimum_bid}, which is the starting bid.')
+                    else:
+                        minimum_bid = product.highest_bid + product.price_interval
+                        messages.error(request, f'Your bid must be at least ₹{minimum_bid}, based on the current highest bid and price interval.')
+
+                    # messages.error(request, f'Your bid amount must be at least {product.price_interval} higher than the current highest bid.')
             else:
                 # Handle the case where the bid form is invalid
                 messages.error(request, 'Invalid bid amount. Please enter a valid amount.')

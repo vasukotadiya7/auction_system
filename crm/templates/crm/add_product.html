@@ -16,6 +16,7 @@
     />
     <title>Auction House</title>
     <link rel="stylesheet" href="{% static 'crm/style.css'%}" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <nav>
@@ -54,11 +55,22 @@
         </ul>
       </div>
     </section>
+
     {% for field, errors in form.errors.items %} {% for error in errors %}
+    <script>
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "{{ error|escapejs }}",
+        confirmButtonText: "OK",
+      });
+    </script>
+    {% endfor %} {% endfor %} {% comment %} {% for field, errors in
+    form.errors.items %} {% for error in errors %}
     <div class="alert alert-danger" role="alert">
       <strong>{{ field|title }} Error: </strong> {{ error }}
     </div>
-    {% endfor %} {% endfor %}
+    {% endfor %} {% endfor %} {% endcomment %}
 
     <section id="product_form" class="section-p1">
       <h2 class="heading_h2">ADD PRODUCT</h2>

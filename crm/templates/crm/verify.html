@@ -11,6 +11,7 @@
     />
     <title>Verify Your Self</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
       * {
@@ -122,6 +123,17 @@
   </head>
 
   <body>
+    {% if messages %}
+    <script>
+      {% for message in messages %}
+        Swal.fire({
+          icon: "{% if 'error' in message.tags %}error{% elif 'success' in message.tags %}success{% elif 'warning' in message.tags %}warning{% else %}info{% endif %}",
+          title: "{{ message|escapejs }}",
+          confirmButtonText: 'OK'
+        });
+      {% endfor %}
+    </script>
+    {% endif %}
     <div class="container">
       <h4>Verify Code</h4>
       <p>We have sent a verification code to your email address.</p>

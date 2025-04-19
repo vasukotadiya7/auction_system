@@ -186,12 +186,14 @@ class Product(models.Model):
         """
         Check if the bid amount is valid (higher than the current highest bid and follows the price interval).
         """
-        current_highest_bid = self.highest_bid
-        price_interval = self.price_interval
-        
+        price_interval = self.price_interval or 0
         # Calculate the minimum valid bid amount based on the current highest bid and price interval
-        minimum_bid_amount = current_highest_bid + price_interval
-        
+        if self.highest_bid == 0:
+        # No bids yet, use starting bid
+            minimum_bid_amount = self.min_price
+        else:
+        # Bids exist, apply interval rule
+            minimum_bid_amount = self.highest_bid + price_interval        
         return amount >= minimum_bid_amount
     
     def total_bids_count(self):
